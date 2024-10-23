@@ -12,7 +12,16 @@ const mongoDB = require('./db');
     next();
   })
 
-  
+  const path = require('path');
+// const app = express();
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+// app.listen(5000);
   app.use(express.json());
   app.use('/api', require('./Routes/CreateUser'));
   app.use('/api', require('./Routes/DisplayData'));
